@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Co</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #f8f8f8;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        section {
+            display: none;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            background-color: #f8f8f8;
+            text-align: center;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .product {
+            margin: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 200px;
+        }
+
+        .product img {
+            width: 100%;
+            height: auto;
+        }
+
+        .active {
+            display: block;
+        }
+
+        input[type="text"] {
+            width: 300px;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Clothing Co</h1>
+        <nav>
+            <ul>
+                <li><a href="#home" onclick="showSection('home')">Home</a></li>
+                <li><a href="#product" onclick="showSection('product')">Product</a></li>
+                <li><a href="#about" onclick="showSection('about')">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home" class="active">
+            <h2>Welcome to Clothing Co</h2>
+            <p>Your favorite place for fashionable clothes.</p>
+        </section>
+        <section id="product">
+            <h2>Our Featured Products</h2>
+            <label for="searchBox">Search products:</label>
+            <input type="text" id="searchBox" onkeyup="filterProducts()" placeholder="Search products...">
+            <div class="product-list" id="productList">
+                <div class="product" data-name="stylish shirt">
+                    <img src="shirt.jpg" alt="Stylish Shirt">
+                    <h3>Stylish Shirt</h3>
+                    <p>$19.99</p>
+                    <button>Buy Now</button>
+                </div>
+                <div class="product" data-name="casual pants">
+                    <img src="pants.jpg" alt="Casual Pants">
+                    <h3>Casual Pants</h3>
+                    <p>$24.99</p>
+                    <button>Buy Now</button>
+                </div>
+                <div class="product" data-name="summer dress">
+                    <img src="dress.jpg" alt="Summer Dress">
+                    <h3>Summer Dress</h3>
+                    <p>$29.99</p>
+                    <button>Buy Now</button>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <h2>About Clothing Co</h2>
+            <p>We are a team of fashion enthusiasts committed to bringing you the best in clothing. Founded in 2024, our mission is to provide stylish and affordable apparel to everyone.</p>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Clothing Co</p>
+    </footer>
+    <script>
+        function showSection(id) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+            const activeSection = document.getElementById(id);
+            activeSection.style.display = 'block';
+        }
+
+        function filterProducts() {
+            const searchText = document.getElementById('searchBox').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const name = product.getAttribute('data-name').toLowerCase();
+                if (name.includes(searchText)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Thank you for your purchase!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
